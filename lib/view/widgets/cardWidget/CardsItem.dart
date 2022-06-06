@@ -16,6 +16,7 @@ class CardItems extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    //هنا تصيميم card متى يكون فاضي
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
