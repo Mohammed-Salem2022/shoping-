@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "996858782612",
+    "project_id": "shop-getx-fc303",
+    "storage_bucket": "shop-getx-fc303.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996858782612:android:1be03a7ec22914c573e581",
+        "android_client_info": {
+          "package_name": "com.watts.omer.gold.shoping_f"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996858782612-l1mp9hja55m4j206bstqfmnrdbjgrrm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPbzKdNLbnXAR9BPFsA-1aQnZTg8EU1p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996858782612-l1mp9hja55m4j206bstqfmnrdbjgrrm7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
