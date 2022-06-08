@@ -1,19 +1,22 @@
 
 
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoping_f/utils/theme.dart';
 import 'package:shoping_f/view/widgets/cardWidget/card_Total.dart';
 
-import '../../widgets/cardWidget/CardsItem.dart';
+import '../../../controller/card_controller.dart';
+
 import '../../widgets/cardWidget/cardProductCard.dart';
 
 
 
 
 class CardScreen extends StatelessWidget{
-  const CardScreen({Key? key}) : super(key: key);
-
+   CardScreen({Key? key}) : super(key: key);
+  final controller = Get.find<CardController>();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -32,17 +35,56 @@ class CardScreen extends StatelessWidget{
         Column(children: [
           SizedBox(
           height: MediaQuery.of(context).size.height*0.75,
-          child:   ListView.separated(
+          child:
 
-              itemBuilder: (context,indext){
+              GetBuilder<CardController>(builder: (b){
 
-                return CardProductCard();
-              },
-              separatorBuilder: (context,index) {
-                return SizedBox(height: 20,);
+                return  StreamBuilder<QuerySnapshot>(
+                    stream:  controller.getAllDataFromFirebase().asStream(),
+                    builder: (context, snapshot) {
+                      if(snapshot.hasError){
 
-              } ,
-              itemCount: 10)),
+                        return Center(child:  Text('No data try again',style: TextStyle(fontSize: 20),));
+                      }
+                      else if(snapshot.connectionState==ConnectionState.waiting){
+
+                        return const Center(
+                          child: CircularProgressIndicator(
+                              color: Colors.blue, strokeWidth: 2),
+                        );
+
+                      }
+
+
+
+                      return      ListView.separated(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context,index){
+
+
+                          return CardProductCard(image:snapshot.data?.docs[index]['image'] ,
+                            isDelete: snapshot.data?.docs[index]['idDelete'],
+                            totalprice: snapshot.data?.docs[index]['totalprice'],
+                            title: snapshot.data?.docs[index]['title'] ,
+                            count: snapshot.data?.docs[index]['count'] ,
+                            price:  snapshot.data?.docs[index]['price'] ,
+                          );
+
+
+                        },
+                        separatorBuilder: (context,index) {
+                          return SizedBox(height: 20,);
+
+                        } ,
+                      );
+
+
+
+
+                    });
+              })
+
+            ),
           CardTotal(),
         ],),
         ),

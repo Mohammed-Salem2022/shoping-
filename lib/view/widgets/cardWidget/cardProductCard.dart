@@ -6,7 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 import 'package:shoping_f/utils/theme.dart';
 import 'package:get/get.dart';
+
+import '../../../controller/card_controller.dart';
 class CardProductCard extends StatelessWidget {
+  CardProductCard({Key? key,required this.image,required this.isDelete ,required this.totalprice,
+  required this.title ,required this.count,required this.price
+  }) : super(key: key);
+  String image;
+  String ? isDelete;
+  num  totalprice;
+  String title;
+  int count;
+  num price;
+  final countroller= Get.find<CardController>();
   // هنا تصنيم card الي داحل cardscreen
   @override
   Widget build(BuildContext context) {
@@ -20,7 +32,7 @@ class CardProductCard extends StatelessWidget {
 
     ),
     child: Row(children: [
-      Image.network('https://images.unsplash.com/photo-1629424565821-24e10082d7a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+      Image.network(image,
       fit: BoxFit.cover,
       height: MediaQuery.of(context).size.height*0.18,
         width:  MediaQuery.of(context).size.width*0.30,
@@ -29,12 +41,12 @@ class CardProductCard extends StatelessWidget {
         Expanded(child:   Column(
            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-         Text('bla bla bla bal bla blala bla bla bal',
+         Text(title,
          overflow: TextOverflow.ellipsis,
          style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Get.isDarkMode?Colors.white: Colors.black),
          ),
           SizedBox(height: 20,),
-          Text('\$15',
+          Text(totalprice.toString(),
             overflow: TextOverflow.ellipsis,
             style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Get.isDarkMode?Colors.white: Colors.black),
           ),
@@ -44,12 +56,21 @@ class CardProductCard extends StatelessWidget {
       //     mainAxisAlignment: MainAxisAlignment.end,
            children: [
            Row(children: [
-             IconButton(onPressed: (){}, icon: Icon(Icons.add_circle)),
-             Text('1',
-               overflow: TextOverflow.ellipsis,
-               style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Get.isDarkMode?Colors.white: Colors.black),
-             ),
              IconButton(onPressed: (){}, icon: Icon(Icons.remove_circle)),
+             GetBuilder<CardController>(builder: (b){
+
+               return  Text(count.toString(),
+                 overflow: TextOverflow.ellipsis,
+                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Get.isDarkMode?Colors.white: Colors.black),
+               );
+               countroller.update();
+             }),
+             IconButton(onPressed: (){
+
+                countroller.addcount(idDelete: isDelete!, totleprice: totalprice, count: count, price: price);
+               //    countroller.update();
+             }, icon: Icon(Icons.add_circle)),
+
            ],),
            IconButton(onPressed: (){}, icon: Icon(Icons.delete,color: Colors.red,))
            ],)

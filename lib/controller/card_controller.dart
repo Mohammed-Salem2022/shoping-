@@ -11,18 +11,33 @@ import '../model/product_models.dart';
 
  class CardController extends   GetxController{
    User? myid=FirebaseAuth.instance.currentUser;
-  Map buyCardMap={};
+   // int? count;
+  // / num? price;
+  //  num totalprice=50.5;
 
 
 
-  addCardToList(productCard productcard)async{
+   addcount({required String idDelete,required num totleprice ,required int count ,required num price})async{
+
+     DocumentReference   userRef=  FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).
+     collection('Buy').doc(idDelete);
+      // var k=  await  userRef.get().;
+                 userRef.update({
+                   'totalprice': totleprice+price,
+                   'count': count+1,
+                   'idDelete': idDelete,
+                 }).then((value) {
+                   Get.snackbar('منتج', 'تم اضافه منتج',
+                       snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent);
+                 });
+
+                         update();
+
+   }
 
 
 
 
-
-
-  }
     //1
    addCardToFirebbase( productCard p)async{
      //send data to firebase
@@ -33,6 +48,7 @@ import '../model/product_models.dart';
        'title':p.title,
        'count':p.count,
        'price':p.price,
+       'totalprice':p.price,
        'image':p.image,
        'idDelete':userRef.id,
 
@@ -45,6 +61,7 @@ import '../model/product_models.dart';
 
    }
   Future<int?>  readdataFromFirebase(int index)async{
+    //هنا حتى لايرسل مرتين اللى فايربيس
     //DocumentReference
     //CollectionReference
     int? isDelete1;
@@ -55,10 +72,20 @@ import '../model/product_models.dart';
 
         value.docs.forEach((element) {
           isDelete1=  element['id'];
+          update();
        });
-
+          update();
      });
+          update();
   return isDelete1;
+   }
+
+ Future<QuerySnapshot<Object?>>  getAllDataFromFirebase()async{
+    //get all data
+     CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').
+     doc(myid?.uid).collection('Buy');
+    return await  userRef.get();
+
    }
 
 

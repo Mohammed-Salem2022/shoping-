@@ -29,7 +29,7 @@ class FavortiesScreen extends StatelessWidget{
              builder: (controller){
 
 
-              //  controller.favoriteList1=controller. listGex.read('addfavoriteToList');
+
                if(  controller.favoriteListFOrIcon.isEmpty){
 
                  return Column(children: [
