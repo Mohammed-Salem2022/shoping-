@@ -7,12 +7,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/sockets/src/sockets_io.dart';
+import 'package:shoping_f/controller/card_controller.dart';
 import 'package:shoping_f/controller/product_controller.dart';
+import 'package:shoping_f/model/product_card.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 
 class ItemCard extends StatelessWidget{
    ItemCard({Key? key}) : super(key: key);
    final controller= Get.find<ProductController>();
+   final controllerCard= Get.find<CardController>();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +100,23 @@ class ItemCard extends StatelessWidget{
                                               : Icon(Icons.favorite_border),
 
                                           ),
-                                          IconButton(onPressed: (){}, icon: Icon(Icons.add)),
+                                          IconButton(onPressed: () async{
+                                        if(await controllerCard.readdataFromFirebase( snapshot.data[index]['id'])!=  snapshot.data[index]['id']) {
+                                          productCard p = productCard(
+                                              snapshot.data[index]['id'],
+                                              1,
+                                              snapshot.data[index]['title'],
+                                              snapshot.data[index]['price'],
+                                              snapshot.data[index]['idDelete'],
+                                              snapshot.data[index]['image']);
+                                             controllerCard.addCardToFirebbase(p);
+                                        } else {
+
+                                              controllerCard.defaultDailoge();
+                                             // print('j');
+                                        }
+
+                                          }, icon: Icon(Icons.add)),
                                         ]);
                               }),
 

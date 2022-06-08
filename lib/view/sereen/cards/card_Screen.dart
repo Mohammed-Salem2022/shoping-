@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoping_f/utils/theme.dart';
+import 'package:shoping_f/view/widgets/cardWidget/card_Total.dart';
 
 import '../../widgets/cardWidget/CardsItem.dart';
 import '../../widgets/cardWidget/cardProductCard.dart';
@@ -25,18 +26,34 @@ class CardScreen extends StatelessWidget{
           elevation: 0,
           actions: [IconButton(onPressed: (){}, icon: Icon(Icons.backspace))],
     ),
-      body: ListView.separated(
+      body:SingleChildScrollView(child:
 
-          itemBuilder: (context,indext){
 
-            return CardProductCard();
-          },
-          separatorBuilder: (context,index) {
-            return SizedBox(height: 20,);
+        Column(children: [
+          SizedBox(
+          height: MediaQuery.of(context).size.height*0.75,
+          child:   ListView.separated(
 
-          } ,
-          itemCount: 10)
-    );
+              itemBuilder: (context,indext){
+
+                return CardProductCard();
+              },
+              separatorBuilder: (context,index) {
+                return SizedBox(height: 20,);
+
+              } ,
+              itemCount: 10)),
+          CardTotal(),
+        ],),
+        ),
+        );
+
+
+
+
+
+
+
   }
 
 
