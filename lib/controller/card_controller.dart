@@ -11,14 +11,12 @@ import '../model/product_models.dart';
 
  class CardController extends   GetxController{
    User? myid=FirebaseAuth.instance.currentUser;
-   // int? count;
-  // / num? price;
-  //  num totalprice=50.5;
+
 
 
 
    addcount({required String idDelete,required num totleprice ,required int count ,required num price})async{
-
+               //هنا اضافه منتج فوق منتج الي موجود
      DocumentReference   userRef=  FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).
      collection('Buy').doc(idDelete);
       // var k=  await  userRef.get().;
@@ -26,21 +24,70 @@ import '../model/product_models.dart';
                    'totalprice': totleprice+price,
                    'count': count+1,
                    'idDelete': idDelete,
+
                  }).then((value) {
-                   Get.snackbar('منتج', 'تم اضافه منتج',
-                       snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent);
+                   // Get.snackbar('منتج', 'تم اضافه منتج',
+                   //     snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent);
+
                  });
 
-                         update();
+          update();
 
    }
+   removecount({required String idDelete,required num totleprice ,required int count ,required num price})async{
+           //هنا اوله منتج الي فوق منتج الي موجود
+     DocumentReference   userRef=  FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).
+     collection('Buy').doc(idDelete);
+     if(count >1){
+       userRef.update({
+         'totalprice': totleprice-price,
+         'count': count-1,
+         'idDelete': idDelete,
 
+       }).then((value) {
+         Get.snackbar('!!منتج',
+
+             'تم حذف منتج',
+             snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent);
+
+       });
+
+     }
+
+
+     update();
+
+   }
+   deletedatafromfirebase(int idFavorite)async{
+   //هنا نحذف المنتج الب موجود في CardScreen
+     CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').
+     doc(myid?.uid).collection('Buy');
+     //هنا اذا كان id الموجود في database نفس id الي بضغط عليه هات لي البيانات ثم امسحه
+     await userRef.where('id' ,  isEqualTo: idFavorite).get().then((value) {
+
+       value.docs.forEach((element) {
+
+
+         String  id1= element['idDelete'];
+
+         userRef.doc(id1).delete().then((value) {
+           Get.snackbar('تم ازالة', 'تم ازلة المنتج من  صفحه الشراء ',
+
+               snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent);
+
+         });
+       });
+
+     } );
+     update();
+   }
 
 
 
     //1
    addCardToFirebbase( productCard p)async{
      //send data to firebase
+     //هنا نرسل المنتج الى فايربيس من صفحه homeScreen  ثم نعرض في صفحه cardScreen
      DocumentReference     userRef= await FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy').doc();
      userRef.set({
 
@@ -81,7 +128,7 @@ import '../model/product_models.dart';
    }
 
  Future<QuerySnapshot<Object?>>  getAllDataFromFirebase()async{
-    //get all data
+    //get all data then show data in CardScreen
      CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').
      doc(myid?.uid).collection('Buy');
     return await  userRef.get();

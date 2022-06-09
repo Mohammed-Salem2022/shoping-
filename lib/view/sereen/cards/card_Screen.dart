@@ -29,19 +29,18 @@ class CardScreen extends StatelessWidget{
           elevation: 0,
           actions: [IconButton(onPressed: (){}, icon: Icon(Icons.backspace))],
     ),
-      body:SingleChildScrollView(child:
+      body:  SingleChildScrollView(child:
 
 
         Column(children: [
           SizedBox(
-          height: MediaQuery.of(context).size.height*0.75,
-          child:
+              height: MediaQuery.of(context).size.height*0.75,
+              child:   GetBuilder<CardController>(builder: (builder){
 
-              GetBuilder<CardController>(builder: (b){
-
-                return  StreamBuilder<QuerySnapshot>(
-                    stream:  controller.getAllDataFromFirebase().asStream(),
+                return  FutureBuilder<QuerySnapshot>(
+                    future: controller.getAllDataFromFirebase(),
                     builder: (context, snapshot) {
+
                       if(snapshot.hasError){
 
                         return Center(child:  Text('No data try again',style: TextStyle(fontSize: 20),));
@@ -57,7 +56,9 @@ class CardScreen extends StatelessWidget{
 
 
 
-                      return      ListView.separated(
+
+
+                      return   ListView.separated(
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context,index){
 
@@ -68,6 +69,8 @@ class CardScreen extends StatelessWidget{
                             title: snapshot.data?.docs[index]['title'] ,
                             count: snapshot.data?.docs[index]['count'] ,
                             price:  snapshot.data?.docs[index]['price'] ,
+                            id:   snapshot.data?.docs[index]['id'] ,
+
                           );
 
 
@@ -81,13 +84,27 @@ class CardScreen extends StatelessWidget{
 
 
 
+
                     });
+
+
               })
 
-            ),
+
+
+
+
+
+
+
+          ),
           CardTotal(),
-        ],),
-        ),
+        ],)
+
+
+        )
+
+
         );
 
 
