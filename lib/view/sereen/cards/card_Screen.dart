@@ -27,7 +27,9 @@ class CardScreen extends StatelessWidget{
                Text('Card Item'),centerTitle:true,
                 backgroundColor: Get.isDarkMode?darkGreyClr:mainColor,
           elevation: 0,
-          actions: [IconButton(onPressed: (){}, icon: Icon(Icons.backspace))],
+          actions: [IconButton(onPressed: ()async{
+           await controller.deleteAllProdectFromItemCard();
+          }, icon: Icon(Icons.backspace))],
     ),
       body:  SingleChildScrollView(child:
 

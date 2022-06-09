@@ -81,10 +81,6 @@ import '../model/product_models.dart';
      } );
      update();
    }
-
-
-
-    //1
    addCardToFirebbase( productCard p)async{
      //send data to firebase
      //هنا نرسل المنتج الى فايربيس من صفحه homeScreen  ثم نعرض في صفحه cardScreen
@@ -135,7 +131,30 @@ import '../model/product_models.dart';
 
    }
 
+   Future<QuerySnapshot<Object?>>   totalAllProduct()async{
 
+     //get all data then show data in CardScreen
+     CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').
+     doc(myid?.uid).collection('Buy');
+  return    await  userRef.get();
+
+   }
+
+   deleteAllProdectFromItemCard()async{
+  // هنا نمسح كل البيانات الي في itemCard
+     CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy');
+     await userRef.get().then((value) {
+
+       value.docs.forEach((element) {
+         String deleteLoop=element['idDelete'];
+          userRef.doc(deleteLoop).delete();
+       });
+     });
+
+
+           update();
+
+   }
     defaultDailoge(){
       Get.defaultDialog(title: '!! رسالة تنبية',
 
@@ -153,7 +172,7 @@ import '../model/product_models.dart';
    @override
   void onInit() {
     // TODO: implement onInit
-
+totalAllProduct();
     super.onInit();
   }
 
