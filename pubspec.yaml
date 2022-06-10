@@ -39,6 +39,7 @@ dependencies:
   get_storage: ^2.0.3
   google_fonts: ^2.1.0
   flutter_facebook_auth: '^3.5.0'
+  badges: ^2.0.3
   flutter:
     sdk: flutter
 

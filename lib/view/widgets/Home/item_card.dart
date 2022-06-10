@@ -113,10 +113,10 @@ class ItemCard extends StatelessWidget{
                                         } else {
 
                                               controllerCard.defaultDailoge();
-                                             // print('j');
+
                                         }
 
-                                          }, icon: Icon(Icons.add)),
+                                          }, icon: Icon(Icons.shopping_cart)),
                                         ]);
                               }),
 

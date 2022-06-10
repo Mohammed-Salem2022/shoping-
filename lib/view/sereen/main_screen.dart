@@ -1,12 +1,14 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoping_f/controller/card_controller.dart';
 import 'package:shoping_f/controller/mainscreen_controller.dart';
 import 'package:shoping_f/routes/routes.dart';
 import 'package:shoping_f/utils/theme.dart';
-
+import 'package:badges/badges.dart';
 import '../../controller/product_controller.dart';
 
 class MainScreen extends StatelessWidget{
@@ -20,9 +22,32 @@ class MainScreen extends StatelessWidget{
 
       return Scaffold(appBar: AppBar(title: Text(controller.title[controller.currentIndex.value]),centerTitle: true,elevation: 0,
         backgroundColor: Get.isDarkMode?Colors.blueGrey:mainColor,
-        actions: [IconButton(onPressed: (){
-             Get.toNamed(Namepages.CardScreen);
-        },icon: Image.asset('images/shop.png'),)],
+        actions: [
+
+          GetBuilder<CardController>(
+              init: CardController(),
+              builder: (controllerCard){
+            return  FutureBuilder<QuerySnapshot>(
+                future:controllerCard.getAllDataFromFirebase() ,
+                builder: (context, snapshot) {
+                   return   Badge(
+                     position: BadgePosition.topEnd(top: 0, end: 3),
+                     animationDuration: Duration(milliseconds: 300),
+                     animationType: BadgeAnimationType.slide,
+                     badgeContent:  Text(
+                       '${snapshot.data?.docs.length}',
+                       style: TextStyle(color: Colors.white),
+                     ),
+                     child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {
+                       Get.toNamed(Namepages.CardScreen);
+                     }),
+                   );
+                });
+
+          }),
+
+
+        ],
       ),
         backgroundColor: context.theme.backgroundColor,
         bottomNavigationBar: bottomnavigationbar(controller: controller),

@@ -86,20 +86,35 @@ import '../model/product_models.dart';
    addCardToFirebbase( productCard p)async{
      //send data to firebase
      //هنا نرسل المنتج الى فايربيس من صفحه homeScreen  ثم نعرض في صفحه cardScreen
-     DocumentReference     userRef= await FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy').doc();
-     userRef.set({
+       Get.defaultDialog(title: 'هل تريد شراء',
+           titleStyle:TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Get.isDarkMode?Colors.white:Colors.black) ,
+           middleText: 'هل تريد شراء هذا المنتج',
+           middleTextStyle:TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Get.isDarkMode?Colors.white:Colors.black) ,
+       onConfirm: ()async{
+         DocumentReference     userRef= await FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy').doc();
+         userRef.set({
 
-       'id':p.id,
-       'title':p.title,
-       'count':p.count,
-       'price':p.price,
-       'totalprice':p.price,
-       'image':p.image,
-       'idDelete':userRef.id,
+           'id':p.id,
+           'title':p.title,
+           'count':p.count,
+           'price':p.price,
+           'totalprice':p.price,
+           'image':p.image,
+           'idDelete':userRef.id,
 
-     }).then((value) => {
-       Get.snackbar('تم اضافة', 'تم اضافه الى الى الشراء',snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent)
-     });
+         }).then((value) => {
+           Get.snackbar('تم اضافة', 'تم اضافه الى الى الشراء',snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent)
+         });
+         Get.back();
+         update();
+       },
+       onCancel:(){
+
+         Get.back();
+       }
+       );
+
+
 
 
      update();
