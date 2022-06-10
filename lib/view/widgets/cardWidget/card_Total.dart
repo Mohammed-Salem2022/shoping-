@@ -29,12 +29,12 @@ import '../../../controller/card_controller.dart';
                      return  StreamBuilder<QuerySnapshot>(
                          stream: controller1.totalAllProduct().asStream(),
                          builder: (context,snapshot){
-                           num p=0.toInt();
+                           num p=0;
                            snapshot.data?.docs.forEach((element) {
                              p=p+element['totalprice'];
                            });
 
-                           return   Text('\$${p.ceil().toString() }',style: TextStyle(fontWeight: FontWeight.bold, color:
+                           return   Text('\$${p.toStringAsFixed(2) }',style: TextStyle(fontWeight: FontWeight.bold, color:
                            Get.isDarkMode?Colors.white:Colors.black,fontSize: 20 ,height: 1),
                              overflow: TextOverflow.ellipsis,
 
