@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 import 'package:shoping_f/routes/routes.dart';
 import 'package:shoping_f/utils/theme.dart';
 
-class CardItems extends StatelessWidget{
-  const CardItems({Key? key}) : super(key: key);
+class CardEmpity extends StatelessWidget{
+  const CardEmpity({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

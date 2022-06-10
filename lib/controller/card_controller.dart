@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shoping_f/routes/routes.dart';
+import 'package:shoping_f/view/widgets/text_Utils.dart';
 
 import '../model/product_card.dart';
 import '../model/product_models.dart';
@@ -142,17 +144,39 @@ import '../model/product_models.dart';
 
    deleteAllProdectFromItemCard()async{
   // هنا نمسح كل البيانات الي في itemCard
-     CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy');
-     await userRef.get().then((value) {
+     Get.defaultDialog(title: '!! حذف المنتجات',middleText: 'هل أنت متأكد أنك بحاجة إلى حذف المنتجات',
+     titleStyle: const TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),
+     middleTextStyle: TextStyle(color: Get.isDarkMode?Colors.white:Colors.black,fontSize: 15,fontWeight: FontWeight.bold),
+     cancel: MaterialButton(onPressed: (){Get.back();},child:TextUtils(fontWeight: FontWeight.w600,
+       color: Get.isDarkMode?Colors.white:Colors.black,fontsize: 18,text: 'NO',
+     ) ,),
+        confirm:  MaterialButton(onPressed: ()async{
+          CollectionReference     userRef= FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy');
+          await userRef.get().then((value) {
 
-       value.docs.forEach((element) {
-         String deleteLoop=element['idDelete'];
-          userRef.doc(deleteLoop).delete();
-       });
-     });
+            value.docs.forEach((element) {
+              String deleteLoop=element['idDelete'];
+              userRef.doc(deleteLoop).delete().then((value) {
 
 
-           update();
+                update();
+
+              });
+              Get.offNamed(Namepages.MainScreen);
+            });
+          });
+
+
+          update();
+        },child:TextUtils(fontWeight: FontWeight.w600,
+          color: Get.isDarkMode?Colors.white:Colors.black,fontsize: 18,text: 'Yes',
+        ) ,),
+
+
+
+     );
+
+
 
    }
     defaultDailoge(){
@@ -172,7 +196,7 @@ import '../model/product_models.dart';
    @override
   void onInit() {
     // TODO: implement onInit
-totalAllProduct();
+
     super.onInit();
   }
 

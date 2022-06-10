@@ -1,10 +1,15 @@
 
 
 
+
+
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shoping_f/utils/theme.dart';
+import 'package:shoping_f/view/widgets/cardWidget/CardEmpity.dart';
 import 'package:shoping_f/view/widgets/cardWidget/card_Total.dart';
 
 import '../../../controller/card_controller.dart';
@@ -43,11 +48,8 @@ class CardScreen extends StatelessWidget{
                     future: controller.getAllDataFromFirebase(),
                     builder: (context, snapshot) {
 
-                      if(snapshot.hasError){
 
-                        return Center(child:  Text('No data try again',style: TextStyle(fontSize: 20),));
-                      }
-                      else if(snapshot.connectionState==ConnectionState.waiting){
+                       if(snapshot.connectionState==ConnectionState.waiting){
 
                         return const Center(
                           child: CircularProgressIndicator(
@@ -56,8 +58,11 @@ class CardScreen extends StatelessWidget{
 
                       }
 
+                      else if(!snapshot.hasData){
+                        return Center(child: Text('اعمل اعاده تحديث',style: TextStyle(fontSize: 20),),);
 
 
+                      }
 
 
                       return   ListView.separated(

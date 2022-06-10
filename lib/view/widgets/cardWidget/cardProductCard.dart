@@ -47,7 +47,7 @@ class CardProductCard extends StatelessWidget {
                     style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Get.isDarkMode?Colors.white: Colors.black),
                   ),
                   SizedBox(height: 20,),
-                  Text(totalprice.toString(),
+                  Text(totalprice.toStringAsFixed(2),
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color:Get.isDarkMode?Colors.white: Colors.black),
                   ),
