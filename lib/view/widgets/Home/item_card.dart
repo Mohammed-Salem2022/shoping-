@@ -10,6 +10,7 @@ import 'package:get/get_connect/sockets/src/sockets_io.dart';
 import 'package:shoping_f/controller/card_controller.dart';
 import 'package:shoping_f/controller/product_controller.dart';
 import 'package:shoping_f/model/product_card.dart';
+import 'package:shoping_f/view/sereen/product_details_screen.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 
 class ItemCard extends StatelessWidget{
@@ -121,13 +122,19 @@ class ItemCard extends StatelessWidget{
                               }),
 
 
-                              Container(
+                              InkWell(child: Container(
                                   width: double.infinity,
                                   height: 140,
                                   alignment: Alignment.center,
                                   color:Get.isDarkMode? Colors.white54: Colors.grey,
 
-                                  child: Image.network('${snapshot.data[index]['image']}',fit: BoxFit.cover,width: double.infinity,)
+                                  child: Image.network('${snapshot.data[index]['image']}',fit: BoxFit.cover,width: double.infinity,),
+
+                              ),
+                              onTap: (){
+                              //  print(snapshot.data[index]['id']);
+                                Get.to(()=> ProductDelailsScreen());
+                              },
                               ),
                               Padding(padding: EdgeInsets.only(left: 10,right: 10),
                                 child:  Row(
