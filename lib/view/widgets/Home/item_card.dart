@@ -10,6 +10,7 @@ import 'package:get/get_connect/sockets/src/sockets_io.dart';
 import 'package:shoping_f/controller/card_controller.dart';
 import 'package:shoping_f/controller/product_controller.dart';
 import 'package:shoping_f/model/product_card.dart';
+import 'package:shoping_f/model/product_models.dart';
 import 'package:shoping_f/view/sereen/product_details_screen.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 
@@ -132,8 +133,11 @@ class ItemCard extends StatelessWidget{
 
                               ),
                               onTap: (){
-                              //  print(snapshot.data[index]['id']);
-                                Get.to(()=> ProductDelailsScreen());
+
+                                List? delails=[];
+                                delails.add(snapshot.data[index]);
+
+                               Get.to(()=> ProductDelailsScreen(prodectmodle: delails));
                               },
                               ),
                               Padding(padding: EdgeInsets.only(left: 10,right: 10),
