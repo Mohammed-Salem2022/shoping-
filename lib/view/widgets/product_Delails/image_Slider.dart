@@ -2,26 +2,42 @@
 
 
 
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shoping_f/utils/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'colorsPicker.dart';
+
 
 class ImageSlider extends StatefulWidget {
   String imageUrl;
+
   ImageSlider({Key? key,required this.imageUrl}) : super(key: key);
   @override
   ImageSliderState createState() => ImageSliderState();
 }
 
 class ImageSliderState extends State<ImageSlider> {
+  List<Color> Colorselected=[
+    kColor1,
+    kColor2,
+    kColor3,
+    kColor4,
+    kColor5,
+    kColor2,
+    kColor3,
+    kColor4,
 
+  ];
 
  //
   int currentpage=0;
+  int currentColors=0;
   CarouselController carouselController= CarouselController();
   @override
 
@@ -74,7 +90,34 @@ class ImageSliderState extends State<ImageSlider> {
           ),
           )
 
-            ,)
+            ,),
+         Positioned(
+             bottom: MediaQuery.of(context).size.height*0.03,
+             left: MediaQuery.of(context).size.width*0.80,
+             child: Container(
+               height: MediaQuery.of(context).size.height*0.25,
+               width: MediaQuery.of(context).size.width*0.07,
+           decoration: BoxDecoration(
+             color: Colors.black.withOpacity(0.4),
+             borderRadius: BorderRadius.circular(15)
+           ),
+            child: ListView.separated(
+                itemBuilder:  (context,index){
+                  return GestureDetector(
+                    onTap: (){
+                            setState(() {
+                              currentColors=index;
+                            });
+
+                    },
+                    child: ColorPicker(
+                      color:Colorselected[index] ,
+                      outerBorder: currentColors==index ,),
+                  );
+                },
+                separatorBuilder: (context,index)=> SizedBox(height: 5),
+                itemCount: Colorselected.length)
+         ))
     ],);
   }
 }
