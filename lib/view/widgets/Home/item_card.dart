@@ -97,7 +97,7 @@ class ItemCard extends StatelessWidget{
                                             }
                                             controller.update();
 
-                                            //هنا اذا كان العنصر الي بضغط عليه موحود غي مصفوفه يرجع true
+                                            //هنا اذا كان العنصر الي بضغط عليه موحود في مصفوفه يرجع true
                                           },icon:nn.getfavvoritebool(snapshot.data[index]['id'])? Icon(Icons.favorite)
                                               : Icon(Icons.favorite_border),
 
@@ -132,12 +132,12 @@ class ItemCard extends StatelessWidget{
                                   child: Image.network('${snapshot.data[index]['image']}',fit: BoxFit.cover,width: double.infinity,),
 
                               ),
-                              onTap: (){
+                                onTap: (){
 
-                                List? delails=[];
-                                delails.add(snapshot.data[index]);
+                                 List? delails=[];
+                                 delails.add(snapshot.data[index]);
 
-                               Get.to(()=> ProductDelailsScreen(prodectmodle: delails));
+                                 Get.to(()=> ProductDelailsScreen(prodectmodle: delails));
                               },
                               ),
                               Padding(padding: EdgeInsets.only(left: 10,right: 10),
