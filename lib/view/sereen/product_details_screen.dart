@@ -11,6 +11,7 @@ import 'package:shoping_f/model/product_models.dart';
 
 import '../widgets/product_Delails/cloths_info.dart';
 import '../widgets/product_Delails/image_Slider.dart';
+import '../widgets/product_Delails/size_Cloths.dart';
 import '../widgets/product_Delails/textDescrption.dart';
 
 class ProductDelailsScreen extends StatelessWidget {
@@ -36,13 +37,16 @@ class ProductDelailsScreen extends StatelessWidget {
               ),
           Padding(padding: EdgeInsets.all(10),
            child:  TextDescription(Description: prodectmodle?[0]['description'],),
-            )
-
+            ),
+            SizedBox(height: 15,),
+            SizeCloths(),
 
 
 
           ],
-        ),),)
+        ),
+      ),
+      )
     );
   }
 }
