@@ -106,6 +106,7 @@ class ItemCard extends StatelessWidget{
                                         if(await controllerCard.readdataFromFirebase( snapshot.data[index]['id'])!=  snapshot.data[index]['id']) {
                                           productCard p = productCard(
                                               snapshot.data[index]['id'],
+                                              //count
                                               1,
                                               snapshot.data[index]['title'],
                                               snapshot.data[index]['price'],

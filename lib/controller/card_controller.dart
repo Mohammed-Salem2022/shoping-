@@ -120,6 +120,43 @@ import '../model/product_models.dart';
      update();
 
    }
+   addCardFromdetails( List? cloths)async{
+     //send data to firebase
+     //هنا نرسل المنتج الى فايربيس من صفحه homeScreen  ثم نعرض في صفحه cardScreen
+     Get.defaultDialog(title: 'هل تريد شراء',
+         titleStyle:TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Get.isDarkMode?Colors.white:Colors.black) ,
+         middleText: 'هل تريد شراء هذا المنتج',
+         middleTextStyle:TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Get.isDarkMode?Colors.white:Colors.black) ,
+         onConfirm: ()async{
+           DocumentReference     userRef= await FirebaseFirestore.instance.collection('AddToCard').doc(myid?.uid).collection('Buy').doc();
+           userRef.set({
+
+             'id':cloths?[0]['id'],
+             'title':cloths?[0]['title'],
+             'count':1,
+             'price':cloths?[0]['price'],
+             'totalprice':cloths?[0]['price'],
+             'image':cloths?[0]['image'],
+             'idDelete':userRef.id,
+
+           }).then((value) => {
+             Get.snackbar('تم اضافة', 'تم اضافه الى الى الشراء',snackPosition: SnackPosition.BOTTOM,backgroundColor: Colors.blueAccent)
+           });
+           Get.back();
+           update();
+         },
+         onCancel:(){
+
+           Get.back();
+         }
+     );
+
+
+
+
+     update();
+
+   }
   Future<int?>  readdataFromFirebase(int index)async{
     //هنا حتى لايرسل مرتين اللى فايربيس
     //DocumentReference

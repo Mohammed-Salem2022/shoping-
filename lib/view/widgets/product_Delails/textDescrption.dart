@@ -13,7 +13,7 @@ class TextDescription  extends StatelessWidget {
       Description,
       trimLines: 3,
       textAlign: TextAlign.justify,
-
+      trimMode: TrimMode.Line,
       trimCollapsedText: 'Show More',
       trimExpandedText: ' Show less ',
       lessStyle:  TextStyle(

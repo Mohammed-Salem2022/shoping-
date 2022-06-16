@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import 'package:shoping_f/model/product_models.dart';
 
+import '../widgets/product_Delails/addToCard.dart';
 import '../widgets/product_Delails/cloths_info.dart';
 import '../widgets/product_Delails/image_Slider.dart';
 import '../widgets/product_Delails/size_Cloths.dart';
@@ -40,7 +41,10 @@ class ProductDelailsScreen extends StatelessWidget {
             ),
             SizedBox(height: 15,),
             SizeCloths(),
+            AddToCard(price:  prodectmodle?[0]['price'],
+            shopingCard: prodectmodle!,
 
+            )
 
 
           ],

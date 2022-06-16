@@ -23,12 +23,7 @@ class _SizeClothsState extends State<SizeCloths> {
       margin: EdgeInsets.all(15),
            height: 40,
 
-      decoration: BoxDecoration(
-     // color: Colors.black.withOpacity(0.2),
 
-
-      ),
-      child: Expanded(
 
         child:  ListView.separated(
           scrollDirection: Axis.horizontal,
@@ -70,7 +65,7 @@ class _SizeClothsState extends State<SizeCloths> {
 
         },
         separatorBuilder: (context,index)=> SizedBox(width: 10),
-      ),),
+      ),
     );
   }
 }
