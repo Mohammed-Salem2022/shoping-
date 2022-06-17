@@ -16,17 +16,19 @@ import '../utils/my_String.dart';
 class ProductController extends GetxController{
   User? myid=FirebaseAuth.instance.currentUser;
 
-  var mangerFavoriteList=[];
+  List mangerFavoriteList=[];
   var FavoriteList=[];
   GetStorage listGex=GetStorage();
   List favoriteList1=[];
   List favoriteListFOrIcon=[];
   bool? checkfavorite=false;
+  //search list
+  List searchList=[];
+
+  TextEditingController searchTextcontroll=TextEditingController();
 
 
-
-
-      Future  getproduct()async{
+      Future<List> getproduct()async{
         //هذا جيب البيانات من api
      //        ترجع على شكل مصفوفه
        var respons= await http.get(Uri.parse(baseUrl));
@@ -113,12 +115,22 @@ deletedatafromfirebase(int idFavorite)async{
        update();
 
   }
-
+   // search Text
+   void addSearchToList(String searchNameAge) {
+     searchNameAge = searchNameAge.toLowerCase();
+     searchList=mangerFavoriteList.where((element) {
+       return element['title'].toLowerCase().contains(searchNameAge);
+     }).toList();
+     update();
+   }
 
   @override
   void onInit() async
   {
         //هنا نستدعيgetfavoriteFirebase  اول مايشتغل التطبيق عشان تحتفظ داحل المصفوفه
+        mangerFavoriteList= await getproduct();
+
+
   getfavoriteFirebase();
     super.onInit();
   }
