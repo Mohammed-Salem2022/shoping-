@@ -48,8 +48,12 @@ class ItemCard extends StatelessWidget{
                 style: TextStyle(fontSize: 30),
               );
             }
-            return  GetBuilder<ProductController>(builder: (builder){
-              return   GridView.builder(
+            return GetBuilder<ProductController>(builder: (builder){
+              return controller.searchList.isEmpty &&
+                  controller.searchTextcontroll.text.isNotEmpty?
+              Get.isDarkMode? Image.asset('images/search_empty_dark.png')
+                  :Image.asset('images/search_empry_light.png')
+                  : GridView.builder(
 
                   itemCount: controller.searchList.isEmpty ?  snapshot.data?.length:controller.searchList.length,
 

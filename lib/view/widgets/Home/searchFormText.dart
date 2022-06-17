@@ -23,15 +23,17 @@ class SearchFormText extends StatelessWidget{
             controller.addSearchToList(searchNameAge);
 
           },
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
           decoration:  InputDecoration(
 
-            errorStyle: TextStyle(color: Get.isDarkMode  ? Colors.red:Colors.white ,fontWeight: FontWeight.bold),
+            errorStyle: TextStyle(color: Get.isDarkMode  ? Colors.black:Colors.white ,fontWeight: FontWeight.bold),
             hintText: 'Search ',
             fillColor: Colors.grey.shade200,
             filled: true,
 
             hintStyle: TextStyle(fontSize: 20,color:Get.isDarkMode  ? Colors.black:Colors.black ,fontWeight: FontWeight.normal),
             prefixIcon: Icon(Icons.search,color:Colors.black),
+
             suffixIcon: InkWell(
               onTap: (){controller.searchTextcontroll.clear();
               controller.searchList.clear();
