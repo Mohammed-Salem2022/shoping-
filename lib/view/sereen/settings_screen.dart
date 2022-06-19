@@ -10,6 +10,7 @@ import 'package:shoping_f/controller/auth_controller.dart';
 import 'package:shoping_f/controller/them_controller.dart';
 import 'package:shoping_f/utils/theme.dart';
 import 'package:shoping_f/view/sereen/setting/dark_mode_widget.dart';
+import 'package:shoping_f/view/sereen/setting/logout_widget.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 
 class SettingsScreen extends StatelessWidget{
@@ -39,7 +40,7 @@ class SettingsScreen extends StatelessWidget{
          SizedBox(height:sizeHeight*0.05 ,),
         // LanguageWidget()
          SizedBox(height:sizeHeight*0.05 ,),
-         //LogoutWidget(),
+         LogoutWidget(),
          ]) ,
      ),
       // body: Column(children: [  InkWell(
