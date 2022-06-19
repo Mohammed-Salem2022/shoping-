@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:shoping_f/controller/card_controller.dart';
+import 'package:shoping_f/controller/catogry_controller.dart';
 import 'package:shoping_f/controller/product_controller.dart';
 import 'package:shoping_f/model/product_card.dart';
 import 'package:shoping_f/utils/theme.dart';
@@ -20,9 +21,12 @@ import 'package:shoping_f/utils/theme.dart';
 import 'package:shoping_f/view/sereen/product_details_screen.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 
+
 class CategoryWidget extends StatelessWidget{
-  CategoryWidget({Key? key}) : super(key: key);
+  String kindgategory;
+  CategoryWidget({Key? key,required this.kindgategory}) : super(key: key);
   final controller= Get.find<ProductController>();
+  final controllerCategory= Get.find<CategoryController>();
   final controllerCard= Get.find<CardController>();
 
   @override
@@ -33,7 +37,7 @@ class CategoryWidget extends StatelessWidget{
 
     return Scaffold(
      backgroundColor: context.theme.backgroundColor,
-      appBar: AppBar(title: Text('CategoryWidget'),elevation: 0,
+      appBar: AppBar(title: Text('$kindgategory'),elevation: 0,
       backgroundColor:    Get.isDarkMode? pinkClr: mainColor,
          centerTitle: true,
       ),
@@ -42,14 +46,16 @@ class CategoryWidget extends StatelessWidget{
         padding: EdgeInsets.only(top: 20),
         child:
       FutureBuilder(
-          future:  controller.getproduct(),
+          future:  controllerCategory.getKindGategroy(kindgategory),
           builder: (context, AsyncSnapshot snapshot) {
 
             if(snapshot.hasError){
+              print(controllerCategory.getKindGategroy(kindgategory));
               return Text('No data');
             }
 
             else   if (snapshot.connectionState == ConnectionState.waiting) {
+
               return const Center(
                 child: CircularProgressIndicator(
                     color: Colors.blue, strokeWidth: 2),

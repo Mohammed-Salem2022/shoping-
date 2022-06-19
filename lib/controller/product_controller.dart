@@ -37,6 +37,7 @@ class ProductController extends GetxController{
 
 
      }
+
   
 
 
@@ -129,8 +130,6 @@ deletedatafromfirebase(int idFavorite)async{
   {
         //هنا نستدعيgetfavoriteFirebase  اول مايشتغل التطبيق عشان تحتفظ داحل المصفوفه
         mangerFavoriteList= await getproduct();
-
-
   getfavoriteFirebase();
     super.onInit();
   }

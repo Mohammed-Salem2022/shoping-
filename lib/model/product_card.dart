@@ -10,10 +10,9 @@ class productCard{
   String? idDelete;
   String ?image;
 
-  productCard(this.id, this.count, this.title, this.price, this.idDelete, this.image);
+  productCard(  this.id, this.count, this.title, this.price, this.idDelete, this.image);
 
-  productCard.name(
-      );
+
 
 
 }

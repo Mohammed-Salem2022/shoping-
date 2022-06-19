@@ -37,7 +37,7 @@ class ProductDelailsScreen extends StatelessWidget {
 
               ),
           Padding(padding: EdgeInsets.all(10),
-           child:  TextDescription(Description: prodectmodle?[0]['description'],),
+           child:  TextDescription(Description: /*prodectmodle?[0]['description'],*/'"USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system"'),
             ),
             SizedBox(height: 15,),
             SizeCloths(),

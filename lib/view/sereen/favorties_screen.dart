@@ -7,6 +7,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shoping_f/model/product_card.dart';
+import 'package:shoping_f/view/sereen/product_details_screen.dart';
 
 
 import '../../controller/product_controller.dart';
@@ -48,7 +50,9 @@ class FavortiesScreen extends StatelessWidget{
                  return    ListView.separated(
                itemCount: controller.favoriteListFOrIcon.length,
                itemBuilder: (context,index){
-                    // print(favoriteList.length);
+
+                       // List?details1=[];
+                     // details1.add(  controller.favoriteListFOrIcon[index]);
 
                  return DesginFavortiesScreeen(
 
@@ -56,10 +60,14 @@ class FavortiesScreen extends StatelessWidget{
                    title:  controller.favoriteListFOrIcon[index]['title'],
                    price:   controller.favoriteListFOrIcon[index]['price'],
                    remove:   controller.favoriteListFOrIcon[index]['id'],
-                     controller: controller
+                     controller: controller,
+
+
+
                  );
                } ,
                separatorBuilder: (context,index){
+
                  return Divider(color:Get.isDarkMode? Colors.white:Colors.black,height: 10,thickness: 1,);
                },
 
@@ -83,6 +91,7 @@ Widget DesginFavortiesScreeen( {
   required num price,
   required int remove,
   required ProductController controller,
+
 } ){
 
  // final controller = Get.find<ProductController>();
@@ -106,10 +115,19 @@ Widget DesginFavortiesScreeen( {
           child:ClipRRect(
             
             borderRadius: BorderRadius.circular(10),
-            child:
-            Image.network(image,
+            child:InkWell(child: Image.network(image,
               fit: BoxFit.cover,
-            ),
+            ) ,
+            onTap: (){
+
+            // print(details[0]['price']);
+
+             // Get.to(()=> ProductDelailsScreen(prodectmodle: k));
+
+
+            },
+            )
+
           ) //
       ),
       SizedBox(width: 10),
