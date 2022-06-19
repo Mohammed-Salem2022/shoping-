@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget{
    SettingsScreen({Key? key}) : super(key: key);
 
 
-  final controller=Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     double sizeHeight= MediaQuery.of(context).size.height;
@@ -37,26 +37,13 @@ class SettingsScreen extends StatelessWidget{
              color:Get.isDarkMode? pinkClr:mainColor, fontsize: 25),
          SizedBox(height:sizeHeight*0.05 ,),
          DarkModeWidget(),
-         SizedBox(height:sizeHeight*0.05 ,),
+       //  SizedBox(height:sizeHeight*0.03 ,),
         // LanguageWidget()
-         SizedBox(height:sizeHeight*0.05 ,),
+         SizedBox(height:sizeHeight*0.03 ,),
          LogoutWidget(),
          ]) ,
      ),
-      // body: Column(children: [  InkWell(
-      //     onTap: (){
-      //       ThemeDarkController().ChangeThemedark();
-      //     },
-      //     child: Center(child:  Text('ChangeMode',style: TextStyle(color: Get.isDarkMode?Colors.white:Colors.black,)),)),
-      //   InkWell(
-      //     onTap: (){
-      //       controller.signOutFromApp();
-      //     },
-      //     child: Center(child:  Text('SignOut',style: TextStyle(color: Get.isDarkMode?Colors.white:Colors.black,)),)),
-      //
-      //
-      // ]
-      // )
+
     );
   }
 
