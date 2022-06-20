@@ -39,7 +39,7 @@ class TextFaild extends StatelessWidget{
       cursorColor: darkGreyClr,
       keyboardType: textInputType,
       maxLength: maxLength,
-
+      style: TextStyle(color: Colors.black ),
     decoration:  InputDecoration(
         errorStyle: TextStyle(color: Get.isDarkMode  ? Colors.red:Colors.white ,fontWeight: FontWeight.bold),
     label: label,

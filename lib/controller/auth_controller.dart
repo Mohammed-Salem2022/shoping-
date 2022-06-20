@@ -16,8 +16,11 @@ class AuthController extends GetxController{
   bool isCheckBox= true;
   bool isloading= false;
   String? displayName;
+  RxString MName=''.obs;
+  String? displayEmail;
   String? displayUserphoto;
   FirebaseAuth firebaseAuth=FirebaseAuth.instance;
+  User? userid = FirebaseAuth.instance.currentUser;
   GoogleSignIn userGoogle= GoogleSignIn();
   FaceBookModle?faceBookModle;
   bool checkSignUp=false;
@@ -29,6 +32,22 @@ class AuthController extends GetxController{
     update();
   }
 
+   String? nameUser(){
+
+    return  userid?.displayName;
+
+   }
+   String? imageUser(){
+
+    return userid?.photoURL;
+
+   }
+   String? emailUser(){
+          String? e= userid?.email;
+
+    return  e;
+
+   }
 
   void Visitablity(){
     isVisitablity = !isVisitablity;
@@ -56,6 +75,8 @@ class AuthController extends GetxController{
           email: email1,
           password: password1,
       ).then((value) {
+        displayEmail=email1;
+        displayName=name;
          Get.offNamed(Namepages.MainScreen);
          firebaseAuth.currentUser?.updateDisplayName(name);
          checkSignUp=true;
@@ -106,6 +127,9 @@ class AuthController extends GetxController{
           email: email,
           password: password,
       ).then((value) {
+        checkSignUp=true;
+        checksigninBox.write('auth', checkSignUp);
+
         Get.offNamed(Namepages.MainScreen);
       });
     } on FirebaseAuthException catch (e) {
@@ -143,7 +167,7 @@ class AuthController extends GetxController{
 
   }
   void googleSinUpApp()async{
-
+ //تسجيل عبر قوقل
     try{
       final GoogleSignInAccount? googleUser = await userGoogle.signIn();
       displayName=googleUser?.displayName;
@@ -152,6 +176,16 @@ class AuthController extends GetxController{
       isloading=false;
       checkSignUp=true;
       checksigninBox.write('auth', checkSignUp);
+
+      final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+   await   firebaseAuth.signInWithCredential(credential);
       update();
       Get.offNamed(Namepages.MainScreen);
 
@@ -268,4 +302,11 @@ class AuthController extends GetxController{
    }
 
  }
+ @override
+  void onInit() {
+    // TODO: implement onInit
+
+
+    super.onInit();
+  }
 }
