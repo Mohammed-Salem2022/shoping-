@@ -11,6 +11,7 @@ import 'package:shoping_f/controller/them_controller.dart';
 import 'package:shoping_f/utils/theme.dart';
 import 'package:shoping_f/view/sereen/setting/dark_mode_widget.dart';
 import 'package:shoping_f/view/sereen/setting/logout_widget.dart';
+import 'package:shoping_f/view/sereen/setting/profile_Widget.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 
 class SettingsScreen extends StatelessWidget{
@@ -26,8 +27,9 @@ class SettingsScreen extends StatelessWidget{
     backgroundColor: context.theme.backgroundColor,
      body: Padding(padding: EdgeInsets.all(20),
        child:ListView(children: [
-         // PrifileImage(),
-         SizedBox(height:sizeHeight*0.20 ,),
+         SizedBox(height:sizeHeight*0.02 ,),
+          ProfileWidget(),
+         SizedBox(height:sizeHeight*0.02 ,),
           Divider(
          thickness: 3,
          color:Get.isDarkMode? Colors.white:Colors.black,
