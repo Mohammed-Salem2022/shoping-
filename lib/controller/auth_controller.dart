@@ -16,7 +16,7 @@ class AuthController extends GetxController{
   bool isCheckBox= true;
   bool isloading= false;
   String? displayName;
-  RxString MName=''.obs;
+
   String? displayEmail;
   String? displayUserphoto;
   FirebaseAuth firebaseAuth=FirebaseAuth.instance;

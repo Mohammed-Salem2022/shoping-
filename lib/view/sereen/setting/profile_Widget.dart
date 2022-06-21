@@ -36,9 +36,9 @@ class ProfileWidget extends StatelessWidget {
                 children: [
                  TextUtils(
                text:    controller.nameUser(),
-          fontWeight: FontWeight.bold,
-          color:Get.isDarkMode?Colors.white: Colors.black,
-          fontsize: 25),
+               fontWeight: FontWeight.bold,
+               color:Get.isDarkMode?Colors.white: Colors.black,
+                fontsize: 25),
 
                   TextUtils(
                       text:controller.emailUser(), //contollerAuth.displayEmail,
@@ -47,6 +47,7 @@ class ProfileWidget extends StatelessWidget {
                       fontsize: 15),
                 ],)
             ],);
+
         });
   }
 }
