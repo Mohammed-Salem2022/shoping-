@@ -6,6 +6,8 @@ import 'package:shoping_f/view/widgets/text_Utils.dart';
 import '../../utils/theme.dart';
 import 'package:get/get.dart';
 
+import '../widgets/payment/delivery_container_widget.dart';
+
   class PaymentScreen extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
@@ -20,7 +22,9 @@ import 'package:get/get.dart';
 
       body: SingleChildScrollView(
         child:  Padding(padding: const EdgeInsets.all(20),
-        child: Column(children: [
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
            TextUtils(
                text: 'Shipping to',
                fontWeight: FontWeight.bold,
