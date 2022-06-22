@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shoping_f/utils/theme.dart';
+import 'package:shoping_f/view/sereen/payment_screen.dart';
 import 'package:shoping_f/view/widgets/text_Utils.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ import '../../../controller/card_controller.dart';
                 ),
                 onPressed: (){
 
-
+                  Get.to(()=> PaymentScreen());
                 }, child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
