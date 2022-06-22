@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shoping_f/controller/them_controller.dart';
+import 'package:shoping_f/language/loaclliztion.dart';
 import 'package:shoping_f/routes/routes.dart';
+import 'package:shoping_f/utils/my_String.dart';
 import 'package:shoping_f/utils/theme.dart';
 
 
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeApp.light,
       darkTheme: themeApp.dark ,
+        locale:GetStorage().hasData('lang')? Locale(GetStorage().read('lang')): Locale(ara) ,
+        translations: LocaliztionApp(),
+        fallbackLocale: Locale(ene),
         themeMode: ThemeDarkController().thememode,
       initialRoute: GetStorage().read('auth')==true?Namepages.MainScreen: AppRoutes.Welcome,
       getPages: AppRoutes.routes

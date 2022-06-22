@@ -1,9 +1,13 @@
 
 
 
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:shoping_f/controller/setting_controller.dart';
 
 import '../../../utils/my_String.dart';
 import '../../../utils/theme.dart';
@@ -17,102 +21,117 @@ class LanguageWidget extends StatefulWidget {
 class _LanguageWidgetState extends State<LanguageWidget> {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return GetBuilder<SettingController>(
+        init: SettingController(),
+        builder: (controller){
+      return  Row(
 
-      children: [
-      Material(
+        children: [
+          Material(
 
-        color: Colors.transparent,
+              color: Colors.transparent,
 
-        child:Row(
+              child:Row(
 
-          children: [
-          Container(
-             padding: EdgeInsets.all(7) ,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.redAccent
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(7) ,
+                    decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.redAccent
 
-            ),
-            child: const Icon(
-              Icons.language,
-              color: Colors.white,
-            ),
-          )
+                    ),
+                    child: const Icon(
+                      Icons.language,
+                      color: Colors.white,
+                    ),
+                  )
 
 
-        ],)
-      ),
-      SizedBox(width: MediaQuery.of(context).size.width*0.05,),
+                ],)
+          ),
+          SizedBox(width: MediaQuery.of(context).size.width*0.05,),
 
           InkWell(
             splashColor:Get.isDarkMode? pinkClr: mainColor,
             customBorder: StadiumBorder(),
             child: TextUtils(
-                text: ' language',
+                text: 'language'.tr,
                 fontWeight: FontWeight.bold,
                 color: Get.isDarkMode?Colors.white:Colors.black ,
                 fontsize: 25) ,
             onTap: (){
 
 
+
             },
           ),
-          SizedBox(width: MediaQuery.of(context).size.width*0.12),
-          Container(
-            width: 150,
+         SizedBox(width: 55),
 
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(
-                  color: Get.isDarkMode? Colors.white:Colors.black,
-                  width: 2
-              ),
+           Row(
+             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+             children: [
 
+             Container(
+               width: 150,
 
-
-            ),
-            child: DropdownButtonHideUnderline(
-                child:DropdownButton<String>(
-
-                    iconSize: 25,
-                    icon:  Icon(
-                        Icons.arrow_drop_down,
-                      color: Get.isDarkMode? Colors.white:Colors.black,
-                    ),
-                    items:  [
-                      DropdownMenuItem(
-                          child:Container(padding: EdgeInsets.only(left: 20),
-                          child: Text(arabic,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
-                            ),
-                          ),
-                          ),
-                        value: ara,
-
-                      ),
-                      DropdownMenuItem(
-                          child:Container(padding: EdgeInsets.only(left: 20),
-                            child: Text(english,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20
-                              ),
-                            ),
-                          ),
-                            value: ene,
-                      ),
-                    ],
-                    value: ene,
-                    onChanged: (value){
-                        ene=value!;
-                    })
-            ),
-          ),
+               decoration: BoxDecoration(
+                 borderRadius: BorderRadius.circular(15),
+                 border: Border.all(
+                     color: Get.isDarkMode? Colors.white:Colors.black,
+                     width: 2
+                 ),
 
 
-    ],);
+
+               ),
+               child: DropdownButtonHideUnderline(
+                   child:DropdownButton<String>(
+
+                       iconSize: 25,
+                       icon:  Icon(
+                         Icons.arrow_drop_down,
+                         color: Get.isDarkMode? Colors.white:Colors.black,
+                       ),
+                       items:  [
+                         DropdownMenuItem(
+                           child:Container(padding: const EdgeInsets.all(10),
+                             child: Text(arabic,
+                               style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   fontSize: 20
+                               ),
+                             ),
+                           ),
+                           value: ara,
+
+                         ),
+                         DropdownMenuItem(
+                           child:Container(padding: const EdgeInsets.all(10),
+                             child: Text(english,
+                               style: const TextStyle(
+                                   fontWeight: FontWeight.bold,
+                                   fontSize: 20
+                               ),
+                             ),
+                           ),
+                           value: ene,
+                         ),
+                       ],
+                       value: controller.langLocal,
+                       onChanged: (value){
+                         controller.changelanguage(value!);
+                         Get.updateLocale(Locale(value));
+                       })
+               ),
+             ),
+
+           ],)
+
+
+        ],
+      );
+
+    });
   }
 }

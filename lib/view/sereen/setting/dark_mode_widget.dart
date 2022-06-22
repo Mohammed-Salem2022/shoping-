@@ -47,7 +47,7 @@ Widget bukidIconWidget( context){
     ),
     SizedBox(width: MediaQuery.of(context).size.width*0.05,),
     TextUtils(
-        text: 'DarkMode',
+        text: 'DarkMode'.tr,
         fontWeight: FontWeight.bold,
         color: Get.isDarkMode?Colors.white:Colors.black ,
         fontsize: 25),

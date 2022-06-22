@@ -29,7 +29,7 @@ import '../../widgets/text_Utils.dart';
           splashColor:Get.isDarkMode? pinkClr: mainColor,
           customBorder: StadiumBorder(),
           child: TextUtils(
-          text: 'Logo Out',
+          text: 'Logo Out'.tr,
           fontWeight: FontWeight.bold,
           color: Get.isDarkMode?Colors.white:Colors.black ,
           fontsize: 25) ,
