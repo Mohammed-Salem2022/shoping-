@@ -7,6 +7,7 @@ import '../../utils/theme.dart';
 import 'package:get/get.dart';
 
 import '../widgets/payment/delivery_container_widget.dart';
+import '../widgets/payment/payment_method_widget.dart';
 
   class PaymentScreen extends StatelessWidget {
     @override
@@ -39,8 +40,10 @@ import '../widgets/payment/delivery_container_widget.dart';
               color: Get.isDarkMode?Colors.white:Colors.black,
               fontsize: 25),
           const SizedBox(height: 20,),
-          // PaymentMethodWidget
+          PaymentMethodWidget(),
           const SizedBox(height: 30,),
+
+
           //totalButton
         ]),
         ),
