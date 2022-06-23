@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../widgets/payment/delivery_container_widget.dart';
 import '../widgets/payment/payment_method_widget.dart';
+import '../widgets/payment/total_price_and_Button.dart';
 
   class PaymentScreen extends StatelessWidget {
     @override
@@ -42,9 +43,9 @@ import '../widgets/payment/payment_method_widget.dart';
           const SizedBox(height: 20,),
           PaymentMethodWidget(),
           const SizedBox(height: 30,),
+              TotalPriceandButton()
 
 
-          //totalButton
         ]),
         ),
       )
